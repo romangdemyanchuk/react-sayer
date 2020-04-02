@@ -1,0 +1,73 @@
+.commentt {
+    color: black;
+    /*padding-bottom: 20px;*/
+}
+.commentt-info {
+    flex-wrap: nowrap;
+}
+
+.comment-info {
+    padding-bottom: 6px;
+    display: flex;
+    position: relative;
+}
+.comment-text {
+    font-size: 12px;
+    margin: 5px 0 8px 0;
+    padding: 0 5px 0 0px;
+    font-family: Arial;
+    width: 100%;
+}
+img {
+    vertical-align: middle;
+    border-style: none;
+    margin-left: 10px;
+    margin-right: 15px;
+    width: 40px;
+    height: 40px;
+    margin-top: 10px;
+}
+.ReactModal__Content ReactModal__Content--after-open {
+    top: 0;
+    left: 0;
+}
+.ReactModalPortal > div > div {
+    padding: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+.desktop ~ .ReactModalPortal > div > div {
+    /*padding: 0 !important;*/
+    width: 280px !important;
+    height: 450px !important;
+}
+.ReactModalPortal > div > div >div {
+     width: 100%;
+    height: 100%;
+    overflow-y: scroll
+ }
+
+.mobile ~ .ReactModalPortal .comment-text {
+    font-size: 16px;
+    margin-top: 6px;
+}
+.mobile ~ .ReactModalPortal .item-title {
+    width: 100%;
+    font-size: 24px;
+}
+.mobile ~ .ReactModalPortal .comment {
+    width: 100%;
+    font-size: 18px;
+}
+.mobile ~ .ReactModalPortal .items-info {
+    padding-bottom: 10px;
+}
+.mobile ~ .ReactModalPortal input {
+    width: 100%;
+    margin-right: 25px;
+    font-size: 24px;
+
+}
+.mobile ~ .ReactModalPortal .input-info {
+    margin-top: 10px;
+}

@@ -1,0 +1,48 @@
+{
+  "name": "roma",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "https://romangdemyanchuk.github.io/react",
+  "dependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.4.1",
+    "@testing-library/user-event": "^7.2.1",
+    "detect.js": "^2.2.3",
+    "gh-pages": "^2.2.0",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0",
+    "react-modal": "^3.11.2",
+    "react-native": "^0.61.5",
+    "react-native-swipe-list-view": "^2.4.0",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.4.0",
+    "react-slick": "^0.25.2",
+    "react-swipe": "^6.0.4",
+    "react-swipeable-views": "^0.13.9",
+    "slick-carousel": "^1.8.1",
+    "swipe-js-iso": "^2.1.5"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
