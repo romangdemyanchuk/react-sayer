@@ -13,7 +13,6 @@ body {
 .main-block {
     width: 280px;
     height: 450px;
-    /* background-color: yellow; */
     margin: 0 auto;
     border: 1px solid silver;
     position: absolute;
@@ -42,9 +41,6 @@ body {
     color: #0c0921;
 }
 .item-info {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
     border-bottom: 1px solid silver;
     padding: 15px 0px 18px;
     cursor: pointer;
@@ -288,13 +284,16 @@ i {
 
 
 .btn-del {
-    width: 35px;
-    height: 35px;
+    width: 115px;
+    height: 72px;
     background-color: blue;
     border: none;
     text-align: center;
     padding-top: 4px;
-    display: none;
+    position: absolute;
+    top: 0;
+    right: -116px;
+    transition: .5s;
 }
 .mobile {
     width: 100%;
@@ -333,72 +332,33 @@ font-size: 35px;
 .mobile .item-title {
     font-size: 50px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+li {
+    list-style-type: none;
+}
+.options {
+}
+.item-info-wrapper {
+    display: flex;
+    align-items: center;
+    margin-left: 0;
+    transition: margin-left .5s;
+
+}
+.options .item-info-wrapper {
+    margin-left: -20px;
+    transition: margin-left .5s;
+}
+
+.options .btn-del {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 35px;
+    color: #000;
+    padding-top: 0;
+    transition: .5s;
+}
+.item-info {
+    overflow: hidden;
+}

@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
+import {Swipeable} from 'react-swipeable'
 import './main.css';
 import Modal from "../Modal";
 import detect from 'detect.js'
+import SwipeItem from "../Swipe";
 
 export default class Main extends Component {
     constructor(props) {
@@ -35,19 +37,22 @@ export default class Main extends Component {
                 ]
             },
         ];
-        const localItems = localStorage.getItem("items")
+        const localItems = localStorage.getItem("items");
         !localItems && localStorage.setItem("items", JSON.stringify(this.items));
 
+        const items = localItems ? JSON.parse(localItems) : this.items;
+        const lastItem = items[items.length - 1];
         this.state = {
             modalIsOpen: false,
-            items: localItems ? JSON.parse(localItems) : this.items,
+            items: items,
             modalType:null,
             selectedItemId:null,
             selectedItemTitle:null,
-            selectedItemComment:null
+            selectedItemComment:null,
+            counter: 1
         }
-        this.maxId = 100;
-        this.commentId = 100;
+        this.maxId = lastItem ?  lastItem.id : 0;
+        console.log('maxId', this.maxId);
     }
     componentDidUpdate(prevProps, prevState) {
         if (this.state.items !== prevState.items) {
@@ -85,11 +90,11 @@ export default class Main extends Component {
         e.preventDefault();
         this.addItem(this.state.label);
         this.closeModal();
-    }
+    };
     addItem = (text) => {
         const newItem = {
             title:text,
-            id:this.maxId++,
+            id:++this.maxId,
             comments:[]
         };
         this.setState(({items}) =>{
@@ -103,7 +108,7 @@ export default class Main extends Component {
         })
     }
     addComment = (text) => {
-        const { items } = this.state
+        const { items } = this.state;
         const newComment = {
             id:this.commentId++,
             text:text,
@@ -129,25 +134,107 @@ export default class Main extends Component {
             };
         });
     };
+    addImage() {
+        this.setState({
+            counter: this.state.counter + 1,
+            itemm: {...this.state.itemm, [this.state.counter]: 'http://lorempixel.com/350/65/'}
+        });
+    }
+
+    // removeItem(keyOfItemToRemove) {
+    //     let nextItems = {};
+    //     Object.keys(this.state.itemm).forEach(itemKey => {
+    //         if (itemKey !== keyOfItemToRemove) {
+    //             nextItems[itemKey] = this.state.itemm[itemKey];
+    //         }
+    //     });
+    //
+    //     this.setState({itemm: nextItems});
+    // }
+    // onRemoval = (id) => {
+    //     console.log(    'id', id);
+    //     this.setState(({items}) => {
+    //         const index = items.findIndex((el) => el.id === id);
+    //         console.log('index', index);
+    //         // items.splice(index, 1);
+    //         const newArr = [
+    //             ...items.slice(0, index),
+    //             ...items.slice(index + 1)
+    //         ];
+    //         console.log('newArr', newArr);
+    //         localStorage.setItem("items", JSON.stringify(newArr));
+    //         return {
+    //             items:newArr
+    //         };
+    //
+    //     }, ()=>{
+    //         console.log(this.state.items)
+    //     });
+    // }
+
+    swiping(e, deltaX, deltaY, absX, absY, velocity) {
+        console.log("You're Swiping...", e, deltaX, deltaY, absX, absY, velocity)
+    }
+
+    swipingLeft(e, absX) {
+        console.log("You're Swiping to the Left...", e, absX)
+    }
+    onSwipedLeft(e, absX) {
+        e.event.target.parentNode.parentNode.classList.add("options");
+        console.log("LLLL...", e, absX)
+    }
+    onSwipedRight(e, absX) {
+        e.event.target.parentNode.parentNode.classList.remove("options");
+        console.log("RRRR...", e, absX)
+    }
+
+    swiped(e, deltaX, deltaY, isFlick, velocity) {
+        console.log("You Swiped...", e, deltaX, deltaY, isFlick, velocity)
+    }
+
+    swipedUp(e, deltaY, isFlick) {
+        console.log("You Swiped Up...", e, deltaY, isFlick)
+    }
+    onSwiping = () => {
+        console.log('-----');
+    }
+
     render() {
         const links = this.state.items.map((item) => {
             return (
-                <div className="item-info">
-                    <div className="item-text"
-                        onClick={() => this.openModal('comment', item.id, item.title, item.comments)}
-                        style={{paddingRight: item.comments.length > 0 ? '75px' :'10px'}}
-                    >
-                        {item.title}
-                    </div>
-                    <button className="btn-del" onClick={() => this.deleteItem(item.id)}>
-                        Del
-                    </button>
-                    { item.comments.length > 0 &&
-                        <div className="item-count">
-                            {item.comments.length}
+                // <SwipeItem onRemoval={() => this.onRemoval(item.id)}>
+                <Swipeable
+                    onSwiping={this.swiping}
+                    onSwipingLeft={this.swipingLeft}
+                    onSwipedLeft={this.onSwipedLeft}
+                    onSwipedRight={this.onSwipedRight}
+                    onSwiped={this.swiped}
+                    onSwipedUp={this.swipedUp} >
+                    <div className="item-info">
+                        <div className="item-info-wrapper">
+                            <div className="item-text"
+                                 data-id={item.id}
+                                 onClick={() => this.openModal('comment', item.id, item.title, item.comments)}
+                                 style={{paddingRight: item.comments.length > 0 ? '75px' :'10px'}}
+                            >
+                                {item.title}
+                            </div>
+                            { item.comments.length > 0 &&
+                            <div className="item-count">
+                                {item.comments.length}
+                            </div>
+                            }
                         </div>
-                    }
-                </div>
+                        <div className="optional-del">
+                            <button className="btn-del" onClick={() => this.deleteItem(item.id)}>
+                                Del
+                            </button>
+                        </div>
+
+
+                    </div>
+                    </Swipeable>
+                // </SwipeItem>
             )
         });
         return (
