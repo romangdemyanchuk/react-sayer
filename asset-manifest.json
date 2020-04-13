@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/react-sayer/static/css/main.7f0c6bc9.chunk.css",
+    "main.js": "/react-sayer/static/js/main.23378c91.chunk.js",
+    "main.js.map": "/react-sayer/static/js/main.23378c91.chunk.js.map",
+    "runtime-main.js": "/react-sayer/static/js/runtime-main.ad379502.js",
+    "runtime-main.js.map": "/react-sayer/static/js/runtime-main.ad379502.js.map",
+    "static/js/2.acebfde0.chunk.js": "/react-sayer/static/js/2.acebfde0.chunk.js",
+    "static/js/2.acebfde0.chunk.js.map": "/react-sayer/static/js/2.acebfde0.chunk.js.map",
+    "index.html": "/react-sayer/index.html",
+    "precache-manifest.50e871547494c8437ddb1392bc64e6ad.js": "/react-sayer/precache-manifest.50e871547494c8437ddb1392bc64e6ad.js",
+    "service-worker.js": "/react-sayer/service-worker.js",
+    "static/css/main.7f0c6bc9.chunk.css.map": "/react-sayer/static/css/main.7f0c6bc9.chunk.css.map",
+    "static/js/2.acebfde0.chunk.js.LICENSE.txt": "/react-sayer/static/js/2.acebfde0.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ad379502.js",
+    "static/js/2.acebfde0.chunk.js",
+    "static/css/main.7f0c6bc9.chunk.css",
+    "static/js/main.23378c91.chunk.js"
+  ]
+}
