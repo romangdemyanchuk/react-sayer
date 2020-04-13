@@ -1,11 +1,9 @@
-.commentt {
+.all-comments {
     color: black;
-    /*padding-bottom: 20px;*/
 }
-.commentt-info {
+.all-comments-info {
     flex-wrap: nowrap;
 }
-
 .comment-info {
     padding-bottom: 6px;
     display: flex;
@@ -14,8 +12,7 @@
 .comment-text {
     font-size: 12px;
     margin: 5px 0 8px 0;
-    padding: 0 5px 0 0px;
-    font-family: Arial;
+    padding: 0 5px 0 0;
     width: 100%;
 }
 img {
@@ -37,16 +34,14 @@ img {
     height: 100% !important;
 }
 .desktop ~ .ReactModalPortal > div > div {
-    /*padding: 0 !important;*/
     width: 280px !important;
     height: 450px !important;
 }
 .ReactModalPortal > div > div >div {
-     width: 100%;
+    width: 100%;
     height: 100%;
     overflow-y: scroll
  }
-
 .mobile ~ .ReactModalPortal .comment-text {
     font-size: 16px;
     margin-top: 6px;
@@ -66,7 +61,6 @@ img {
     width: 100%;
     margin-right: 25px;
     font-size: 24px;
-
 }
 .mobile ~ .ReactModalPortal .input-info {
     margin-top: 10px;

@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import {Swipeable} from 'react-swipeable'
 import './main.css';
-import Modal from "../Modal";
+import Modal from "../Modal/Modal";
 import detect from 'detect.js'
-import SwipeItem from "../Swipe";
 
 export default class Main extends Component {
     constructor(props) {
@@ -39,7 +38,6 @@ export default class Main extends Component {
         ];
         const localItems = localStorage.getItem("items");
         !localItems && localStorage.setItem("items", JSON.stringify(this.items));
-
         const items = localItems ? JSON.parse(localItems) : this.items;
         const lastItem = items[items.length - 1];
         this.state = {
@@ -50,19 +48,14 @@ export default class Main extends Component {
             selectedItemTitle:null,
             selectedItemComment:null,
             counter: 1
-        }
+        };
         this.maxId = lastItem ?  lastItem.id : 0;
-        console.log('maxId', this.maxId);
     }
     componentDidUpdate(prevProps, prevState) {
         if (this.state.items !== prevState.items) {
             localStorage.setItem("items", JSON.stringify(this.state.items));
         }
     }
-    componentWillUnmount() {
-        // localStorage.removeItem("items")
-    }
-
     openModal = (type, itemId, itemTitle, itemComment) => {
         this.setState({
             modalIsOpen: true,
@@ -72,7 +65,6 @@ export default class Main extends Component {
             selectedItemComment:itemComment
         });
     };
-
     closeModal = () => {
         this.setState({
             modalIsOpen: false
@@ -106,7 +98,7 @@ export default class Main extends Component {
                 items:newArr
             }
         })
-    }
+    };
     addComment = (text) => {
         const { items } = this.state;
         const newComment = {
@@ -114,13 +106,19 @@ export default class Main extends Component {
             text:text,
             image:"https://via.placeholder.com/40x40?text=imgi"
         };
-        const itemIndex = items.map(e => e.id).indexOf(this.state.selectedItemId)
-        items[itemIndex].comments.push(newComment)
+        const itemIndex = items.map(e => e.id).indexOf(this.state.selectedItemId);
+        items[itemIndex].comments.push(newComment);
         localStorage.setItem("items", JSON.stringify(items));
         this.setState({
             items: items
             }
         )
+    };
+    deleteOptionsClass() {
+        const elems = document.querySelectorAll(".options");
+        [].forEach.call(elems, function(el) {
+            el.classList.remove("options");
+        });
     }
     deleteItem = (id) => {
         this.setState(({items}) => {
@@ -133,83 +131,22 @@ export default class Main extends Component {
                 items:newArr
             };
         });
+        this.deleteOptionsClass();
     };
-    addImage() {
-        this.setState({
-            counter: this.state.counter + 1,
-            itemm: {...this.state.itemm, [this.state.counter]: 'http://lorempixel.com/350/65/'}
-        });
-    }
-
-    // removeItem(keyOfItemToRemove) {
-    //     let nextItems = {};
-    //     Object.keys(this.state.itemm).forEach(itemKey => {
-    //         if (itemKey !== keyOfItemToRemove) {
-    //             nextItems[itemKey] = this.state.itemm[itemKey];
-    //         }
-    //     });
-    //
-    //     this.setState({itemm: nextItems});
-    // }
-    // onRemoval = (id) => {
-    //     console.log(    'id', id);
-    //     this.setState(({items}) => {
-    //         const index = items.findIndex((el) => el.id === id);
-    //         console.log('index', index);
-    //         // items.splice(index, 1);
-    //         const newArr = [
-    //             ...items.slice(0, index),
-    //             ...items.slice(index + 1)
-    //         ];
-    //         console.log('newArr', newArr);
-    //         localStorage.setItem("items", JSON.stringify(newArr));
-    //         return {
-    //             items:newArr
-    //         };
-    //
-    //     }, ()=>{
-    //         console.log(this.state.items)
-    //     });
-    // }
-
-    swiping(e, deltaX, deltaY, absX, absY, velocity) {
-        console.log("You're Swiping...", e, deltaX, deltaY, absX, absY, velocity)
-    }
-
-    swipingLeft(e, absX) {
-        console.log("You're Swiping to the Left...", e, absX)
-    }
-    onSwipedLeft(e, absX) {
+    onSwipedLeft = (e) => {
+        this.deleteOptionsClass();
         e.event.target.parentNode.parentNode.classList.add("options");
-        console.log("LLLL...", e, absX)
-    }
-    onSwipedRight(e, absX) {
+    };
+    onSwipedRight = (e) => {
         e.event.target.parentNode.parentNode.classList.remove("options");
-        console.log("RRRR...", e, absX)
-    }
-
-    swiped(e, deltaX, deltaY, isFlick, velocity) {
-        console.log("You Swiped...", e, deltaX, deltaY, isFlick, velocity)
-    }
-
-    swipedUp(e, deltaY, isFlick) {
-        console.log("You Swiped Up...", e, deltaY, isFlick)
-    }
-    onSwiping = () => {
-        console.log('-----');
-    }
+    };
 
     render() {
         const links = this.state.items.map((item) => {
             return (
-                // <SwipeItem onRemoval={() => this.onRemoval(item.id)}>
                 <Swipeable
-                    onSwiping={this.swiping}
-                    onSwipingLeft={this.swipingLeft}
                     onSwipedLeft={this.onSwipedLeft}
-                    onSwipedRight={this.onSwipedRight}
-                    onSwiped={this.swiped}
-                    onSwipedUp={this.swipedUp} >
+                    onSwipedRight={this.onSwipedRight} >
                     <div className="item-info">
                         <div className="item-info-wrapper">
                             <div className="item-text"
@@ -227,14 +164,13 @@ export default class Main extends Component {
                         </div>
                         <div className="optional-del">
                             <button className="btn-del" onClick={() => this.deleteItem(item.id)}>
-                                Del
+                                { this.isMobile ?
+                                'Delete' : <i className="fa fa-times"/>
+                                }
                             </button>
                         </div>
-
-
                     </div>
-                    </Swipeable>
-                // </SwipeItem>
+                </Swipeable>
             )
         });
         return (
@@ -251,7 +187,7 @@ export default class Main extends Component {
                         <div className="items">
                             {links}
                         </div>
-                        <div onClick={()=>this.openModal('item')}  className="plus-circle"></div>
+                        <div onClick={()=>this.openModal('item')}  className="plus-circle"/>
                     </div>
                     < Modal modalIsOpen={this.state.modalIsOpen}
                             closeModal={this.closeModal}
