@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "0c6743538f6eba854cbfb7adfd53afa8",
+    "revision": "17d212a7d58db26d0ec876b2ae3e60e7",
     "url": "/react-sayer/index.html"
   },
   {
-    "revision": "68b0fa053cf0af339bc8",
+    "revision": "8928dcca82f53a1181be",
     "url": "/react-sayer/static/css/main.7f0c6bc9.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/react-sayer/static/js/2.acebfde0.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "68b0fa053cf0af339bc8",
-    "url": "/react-sayer/static/js/main.a587d0dd.chunk.js"
+    "revision": "8928dcca82f53a1181be",
+    "url": "/react-sayer/static/js/main.5df7457e.chunk.js"
   },
   {
     "revision": "42c46ab580fe4f230cd4",
