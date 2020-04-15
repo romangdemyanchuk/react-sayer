@@ -7,7 +7,7 @@ export default class App extends Component {
     render() {
         return (
             <Router>
-                <Route path="/main" component={Main}/>
+                <Route path="/" component={Main}/>
             </Router>
         );
     }
