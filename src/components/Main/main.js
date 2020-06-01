@@ -152,11 +152,11 @@ export default class Main extends Component {
                             <div className="item-text"
                                  data-id={item.id}
                                  onClick={() => this.openModal('comment', item.id, item.title, item.comments)}
-                                 style={{paddingRight: item.comments.length > 0 ? '75px' :'10px'}}
+                                 style={{paddingRight: (item.comments.length > 0) ? '75px' :'10px'}}
                             >
                                 {item.title}
                             </div>
-                            { item.comments.length > 0 &&
+                            { (item.comments.length > 0) &&
                             <div className="item-count">
                                 {item.comments.length}
                             </div>
